@@ -1,0 +1,411 @@
+Inheritance:
+	Program1:Is there any compilation errors in the below program? If yes correct those else find the output
+	Answer: There are 2 errors in the given program
+			 incompatible types: possible lossy conversion from double to float sample.m3(45.3, 67)
+			 no suitable method found for m3(float,int) example.m3(45.3f, 67);
+			 The corrected version is:
+						 class Example {
+
+				public static void m1() {
+					System.out.println("A class m1");
+
+				}
+
+				public void m2() {
+					System.out.println("A class m2");
+
+				}
+
+				public static void m3() {
+					System.out.println("A class m3 no-param");
+
+				}
+
+				int m3(String s) {
+					System.out.println("A class m3 string-param");
+					return 50;
+				}
+			}
+
+			class Sample extends Example {
+
+				public static void m1() {
+					System.out.println("B class m1");
+				}
+
+				public void m2() {
+					System.out.println("B class m2");
+				}
+
+				void m3(float f, int x) {
+					System.out.println("B m3 float, int param");
+				}
+			}
+
+			class Test {
+				public static void main(String[] args) {
+					Sample sample = new Sample();
+					sample.m1();
+					sample.m2();
+					sample.m3("abc");
+					sample.m3(45.3f, 67);
+					sample.m3(45.3f, 67);
+
+					Example example = new Sample();
+					example.m1();
+					example.m2();
+					example.m3();
+					example.m3("abc");
+					example.m3("abc");
+				}
+			}
+			And the output:
+			B class m1
+			B class m2
+			A class m3 string-param
+			B m3 float, int param
+			B m3 float, int param
+			A class m1
+			B class m2
+			A class m3 no-param
+			A class m3 string-param
+			A class m3 string-param
+			
+			
+	Program2:Is there any compilation errors in the below program? If yes correct those else find the output
+	Answer: There is one error
+			method m4 in class Example cannot be applied to given types;
+	The correct version is
+	class Example {
+
+    public static void m1() {
+        System.out.println("A class m1");
+
+    }
+
+    public void m2() {
+        System.out.println("A class m2");
+
+    }
+
+    public void m3() {
+        System.out.println("A class m3");
+
+    }
+
+    public void m4() {
+        System.out.println("A m4 no param ");
+    }
+}
+
+class Sample extends Example {
+
+    public static void m1() {
+        System.out.println("B class m1");
+    }
+
+    public void m2() {
+        System.out.println("B class m2");
+    }
+
+    void m4(String s) {
+        System.out.println("B m4 String param");
+    }
+}
+
+class Test {
+    public static void main(String[] args) {
+        Sample sample = new Sample();
+        sample.m1();
+        sample.m2();
+        sample.m3();
+        sample.m4();
+        sample.m4("HK");
+
+        Example example = new Sample();
+        example.m1();
+        example.m2();
+        example.m3();
+        example.m4();
+        //example.m4("HK");
+    }
+}
+	And the output is:
+		B class m1
+		B class m2
+		A class m3
+		A m4 no param 
+		B m4 String param
+		A class m1
+		B class m2
+		A class m3
+		A m4 no param 
+	
+	Program3:Is there any compilation errors in the below program? If yes correct those else find the output
+	Answer: There is one error
+			 incompatible types: possible lossy conversion from long to int
+			The correct version is
+			class A {
+				void m1(int a) {
+					System.out.println("A int arg ");
+				}
+
+			}
+
+			class B extends A {
+
+				void m1(float f) {
+					System.out.println("B float arg");
+				}
+			}
+
+			public class C {
+				public static void main(String[] args) {
+					B b = new B();
+					b.m1(50);
+					b.m1('a');
+					b.m1(50l);
+
+					System.out.println();
+
+					A a = new B();
+					a.m1(50);
+					a.m1('a');
+					a.m1(50);
+
+				}
+
+			}
+			The output is:
+				A int arg 
+				A int arg 
+				B float arg
+
+				A int arg 
+				A int arg 
+				A int arg 
+	
+	
+	Program4: Is there any compilation errors in the below program? If yes correct those else find the output
+	Answer: There are no errors
+	Output: B float arg
+			B float arg
+			A int arg 
+
+			A int arg 
+			A int arg 
+			A int arg 
+
+
+
+	Program5:Is there any compilation errors in the below program? If yes correct those else find the output
+	Answer: There is one error
+			 incompatible types: possible lossy conversion from long to int
+			The correct version is
+			class A {
+				void m1(int a) {
+					System.out.println("A int arg ");
+				}
+
+			}
+
+			class B extends A {
+
+				void m1(float f) {
+					System.out.println("B float arg");
+				}
+
+				void m1(char ch) {
+					System.out.println("B char arg");
+				}
+			}
+
+			public class C {
+				public static void main(String[] args) {
+					B b = new B();
+					b.m1(50);
+					b.m1('a');
+					b.m1(50l);
+
+					System.out.println();
+
+					A a = new B();
+					a.m1(50);
+					a.m1('a');
+					a.m1(50);
+
+				}
+
+			}
+			The output is:
+			A int arg 
+			B char arg
+			B float arg
+
+			A int arg 
+			A int arg 
+			A int arg 
+			
+	Program6:Is there any compilation errors in the below program? If yes correct those else find the output
+	Answer: There is one error
+			 incompatible types: possible lossy conversion from long to int
+			The correct version is
+			class A {
+				void m1(int a) {
+					System.out.println("A int arg ");
+				}
+
+				void m1(char ch) {
+					System.out.println("A char arg");
+				}
+
+			}
+
+			class B extends A {
+
+				void m1(float f) {
+					System.out.println("B float arg");
+				}
+
+				void m1(char ch) {
+					System.out.println("B char arg");
+				}
+			}
+
+			public class C {
+				public static void main(String[] args) {
+					B b = new B();
+					b.m1(50);
+					b.m1('a');
+					b.m1(50l);
+
+					System.out.println();
+
+					A a = new B();
+					a.m1(50);
+					a.m1('a');
+					a.m1(50);
+
+				}
+
+			}
+			The output is:
+			A int arg 
+			B char arg
+			B float arg
+
+			A int arg 
+			B char arg
+			A int arg 
+			
+	Program7: Is there any compilation errors in the below program? If yes correct those else find the output
+	Answer: There are no errors
+	Output:
+			B int arg
+			B int arg
+			B long arg
+
+			B float arg 
+			B float arg 
+			B float arg 
+			
+	Program8: Is there any compilation errors in the below program? If yes correct those else find the output
+	Answer: There are no errors
+	Output:	
+			B String arg
+			A object arg 
+
+			A object arg 
+			A object arg 
+			
+	Program9:Is there any compilation errors in the below program? If yes correct those else find the output
+	Answer: There is one error
+			 incompatible types:incompatible types: int cannot be converted to java.lang.String
+			The correct version is
+			class A {
+				void m1(String obj) {
+					System.out.println("A String arg ");
+				}
+
+			}
+
+			class B extends A {
+
+				void m1(Object str) {
+					System.out.println("B object arg");
+				}
+			}
+
+			public class C {
+				public static void main(String[] args) {
+					B b = new B();
+					b.m1("a");
+					b.m1(10);
+
+					System.out.println();
+
+					A a = new B();
+					a.m1("a");
+					a.m1("10");
+
+				}
+
+			}
+			
+			The output is:
+					A String arg 
+					B object arg
+
+					A String arg 
+					A String arg 
+
+
+Find the valid overriding methods below
+Program1:
+class Example{
+    void m1() {}
+}
+
+class Sample{
+    int m1() {}
+}
+
+class Sample {
+    void m1() {}
+}
+Error: Change the class name Sample as it is twice
+
+Program2:
+class Example{
+	 static void m1() {}
+}
+
+class Sample{
+	void m1() {}
+}
+
+class Sample {
+	static void m1() {}
+}
+Error: Change the class name Sample as it is twice
+
+Program3:
+class Example {
+	void m1() {
+	}
+}
+
+class Sample {
+
+
+	private void m1() {
+	}
+}
+
+class Sample {
+
+
+	public void m1() {
+	}
+}
+Error: Change the class name Sample as it is twice

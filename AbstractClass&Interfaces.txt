@@ -1,0 +1,325 @@
+Abstract Class and Interface:
+
+Find the valid abstract method declarations from the below program:
+	abstract class Example{
+	abstract void m1();
+	abstract int m2();
+	abstract void m3(String str);
+	abstract static int m4();
+	private abstract  void m5();
+	public final abstract void m6() ;
+	static abstract void m7();
+
+	}
+
+    abstract static int m4(); and static abstract void m7(); -is not valid as static methods cannot be overridden and abstract keyword is used to define the method later
+	private abstract  void m5(); - is not valid as private keyword makes the child classes to not access the abstract methods to define them
+	public final abstract void m6() ; - is not valid as the final keyword restricts the function definition to be same and unchangeable which is contradictary to abstract keyword
+
+Find the compilation errors in the following examples:
+1.	class Example{
+	void m1();
+	}	
+	Method body should be added
+2.  class Example{
+	abstract void m1();
+	}
+	Make class name as Abstract
+3.	abstract class Example{
+	abstract void m1();
+	}
+	Define m1() when a class extends class Example
+4.	abstract class Example{
+	abstract void m1();
+
+	public static void main(String[] args){
+		Example e=new Example();
+	}
+	}
+	The abstract method needs to be implemented before creating an object of abstract class
+5. 	abstract class Example{
+	abstract void m1();
+	abstract void m2();
+
+	}
+
+	class Sample{
+	void m1(){
+	System.out.println("m1");
+	}
+	}
+	No error
+6. abstract class Example{
+	abstract void m1();
+	abstract void m2();
+
+	}
+
+	abstract class Sample{
+	void m1(){
+	System.out.println("m1");
+	}
+	}
+	No error
+7.	abstract class Example{
+	abstract void m1(){
+	System.out.println("m1");
+	}
+
+	}
+
+	class Sample{
+	void m1(){
+	System.out.println("m1");
+	}
+
+	void m2(){
+	System.out.println("m2");
+	}
+
+	public static void main(String[] args){
+		Example e=new Sample();
+		e.m1();
+		e.m2();
+	}
+	}
+	m2() cannot be called with Example object as it doesn't inherit the method defined in Sample class.
+8.  abstract class Example{
+	static void m1() {
+	System.out.println("Example m1");
+	}
+
+	void m2() {
+		System.out.println("Example m2");
+	}
+
+
+	}
+
+	class Sample extends Example{
+	public static void main(String[] args) {
+	Example.m1();
+	Example e=new Example();
+	e.m2();
+	}
+	}
+	As there is no abstract method in class example the it should be a normal class
+9.	abstract class Example{
+	static void m1() {
+	System.out.println("Example m1");
+	}
+
+	void m2() {
+		System.out.println("Example m2");
+	}
+
+
+	}
+
+	class Sample extends Example{
+	public static void main(String[] args) {
+	m1();
+	Sample e=new Sample();
+	e.m2();
+	}
+	}
+	No error
+
+
+Find the output of the below programs
+abstract class Bus{
+    abstract void engine();
+
+    void breaks() {
+        System.out.println("Breaks applied bus stopped");
+    }
+
+    void wheels() {
+        System.out.println("Bus will run on 6 wheels");
+    }
+}
+class RedBus extends Bus{
+    @Override
+    void engine() {
+        System.out.println("Reb bus engine capacity is 40 KMPH");
+
+    }
+}
+class Volvo extends Bus{
+    @Override
+    void engine() {
+        System.out.println("volvo bus engine capacity is 110 KMPH");
+
+    }
+}
+class C{
+    public static void main(String[] args) {
+        Bus redBus=new RedBus();
+        redBus.engine();
+        redBus.breaks();
+        redBus.wheels();
+        Bus volvoBus=new Volvo();
+        volvoBus.engine();
+        volvoBus.breaks();
+        volvoBus.wheels();
+    }
+}
+
+Output:
+Reb bus engine capacity is 40 KMPH
+Breaks applied bus stopped
+Bus will run on 6 wheels
+volvo bus engine capacity is 110 KMPH
+Breaks applied bus stopped
+Bus will run on 6 wheels
+
+Find the compilation errors in the following interfaces
+1.	interface Shape{
+	void findArea() {
+		System.out.println("Shape area");
+		}
+	}
+	To have a method body in the interface default keyword should be specified.
+2.	interface Shape{
+	private void findArea();
+	protected  void findPeremeter();
+	void print();
+	public void display();
+	
+	}
+	As findArea() is private it cannot be accessed later so the body should be defined.
+	findPeremeter() to define the body make it default.
+3.	interface Shape{
+	private void findArea();
+	protected  void findPeremeter();
+	void print();
+	public void display();
+	
+	}
+
+	class Example {
+	Shape s=null;
+	Shape s1=new Shape();
+	}
+	As findArea() is private it cannot be accessed later so the body should be defined.
+	findPeremeter() to define the body make it default.
+	
+	
+predict the output of the following programs
+interface Vehicle{
+    void engine();
+    void breaks();
+}
+
+abstract class Bus implements Vehicle{
+
+
+    public void breaks() {
+        System.out.println("Breaks applied bus stopped");
+    }
+
+}
+
+class RedBus extends Bus{
+
+    @Override
+    public
+    void engine() {
+        System.out.println("Reb bus engine capacity is 40 KMPH");
+
+    }
+
+
+}
+
+class Volvo extends Bus{
+
+    @Override
+    public
+    void engine() {
+        System.out.println("volvo bus engine capacity is 110 KMPH");
+
+    }
+
+
+}
+
+class C{
+    public static void main(String[] args) {
+        Vehicle redBus=new RedBus();
+        redBus.engine();
+        redBus.breaks();
+
+        Vehicle volvoBus=new Volvo();
+        volvoBus.engine();
+        volvoBus.breaks();
+    }
+}
+
+
+Output:
+Reb bus engine capacity is 40 KMPH
+Breaks applied bus stopped
+volvo bus engine capacity is 110 KMPH
+Breaks applied bus stopped
+
+
+interface Animal{
+    public void eat();
+    public void sleep();
+}
+
+class Lion implements Animal{
+
+    @Override
+    public void eat() {
+        System.out.println("I, Lion eats non-veg");
+
+    }
+
+    @Override
+    public void sleep() {
+        System.out.println("I, Lion sleeps in caves");
+
+    }
+
+}
+
+class Rabbit implements Animal{
+
+    @Override
+    public void eat() {
+        System.out.println("I, Rabbit eats veg");
+
+    }
+
+    @Override
+    public void sleep() {
+        System.out.println("I, Rabbit sleeps in bushes");
+
+    }
+
+}
+
+class Zoo{
+    public static void  sendAnimal(Animal a) {
+        a.eat();
+        a.sleep();
+    }
+}
+
+
+class AnimalUser{
+    public static void main(String[] args) {
+        Zoo.sendAnimal(new Lion());
+        Zoo.sendAnimal(new Rabbit());
+    }
+}
+
+Output:
+I, Lion eats non-veg
+I, Lion sleeps in caves
+I, Rabbit eats veg
+I, Rabbit sleeps in bushes
+
+

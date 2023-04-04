@@ -1,0 +1,578 @@
+Exception Handling:
+
+Program1: 
+class ExecutionWithException {
+	public static void main(String[] args) {
+		int a = 20;
+		int b = 0;
+		System.out.println("a value: " + a);
+		System.out.println("b value: " + b);
+		int c = a / b;
+		System.out.println("c value: " + c);
+	}
+}
+
+Output: 
+Error: Could not find or load main class Main
+Caused by: java.lang.ClassNotFoundException: Main
+
+Program2:
+Q) Write a program
+To add the given two numbers if no exception is raised
+class Main {
+    public static void main(String[] args) {
+        int a = 4;
+        int b = 5;
+
+        System.out.println("java Addition: " + (a+b));
+    }
+}
+
+To add 4, 5 if ArraylndexOutOfBoundsException is raised
+class Main {
+    public static void main(String[] args) {
+        int a = 4;
+        int b = 5;
+        try {
+            System.out.println("java Addition: " + (a + b));
+        }
+        catch(ArrayIndexOutOfBoundsException ex){
+            System.out.println("Array Index Out of Bounds exception"+ ex.getMessage());
+        }
+    }
+}
+
+To add 6, 7 if NumberFormatException is raised
+class Main {
+    public static void main(String[] args) {
+        int a = 3;
+        int b = 0;
+        try {
+            System.out.println("java Addition: " + (a + b));
+        }
+        catch(NumberFormatException ex){
+            System.out.println("NumberFormat exception"+ ex.getMessage());
+        }
+    }
+}
+
+Program3:
+class Test {
+	public static void main(String[] args) {
+		try {
+			System.out.println(10 / 0);
+		} catch (ArithmeticException ae) {
+			System.out.println("getMessage() method output");
+			System.out.println(ae.getMessage());
+			System.out.println("toString() method output");
+			System.out.println(ae.toString());
+			System.out.println("printStackTrace() method output");
+			ae.printStackTrace();
+			System.out.println("JVM default output");
+			throw ae;
+//By using above statement we are just re-throwing the caught exception,
+//this exception is caught by JVM default handler and printsfull exception message along with thread name.
+		}
+	}
+}
+
+Output:
+getMessage() method output
+/ by zero
+toString() method output
+java.lang.ArithmeticException: / by zero
+printStackTrace() method output
+JVM default output
+java.lang.ArithmeticException: / by zero
+	at Main.main(Test.java:4)
+Exception in thread "main" java.lang.ArithmeticException: / by zero
+	at Main.main(Test.java:4)
+
+
+program 4
+
+class Example {
+	void ml() {
+		System.out.println("1");
+		try {
+			System.out.println("2");
+			System.out.println("3");
+			System.out.println("4");
+
+		} catch (Exception e) {
+			System.out.println("5");
+			System.out.println("6");
+			System.out.println("7");
+		}
+		System.out.println("8");
+	}
+}
+
+What is thc output from below test cases?
+
+Case #1: No exception is raised in the program - 1 2 3 4 8
+
+Case #2: exception is raised at stmt 1 - 1 5 6 7 8
+
+Case #3: exception is raised at stmt ' '3" and catch block is matched - 1 2 3 5 6 7 8
+
+Case #4: exception is raised at stmt "3" and catch block is not matched - 1 2 3
+
+Case #5: exception is raised at stmt "3" and catch block is matched, again exception is raised at stmt 6 - 1 2 3 5
+
+
+Program5:
+class Main {
+    public static void main(String[] args) {
+        try {
+            System.out.println("In outer try");
+            try {
+                System.out.println("ln inner try");
+                System.out.println(10 / 0);
+            } catch (ArithmeticException nas) {
+                System.out.println("ln inner catch");
+                System.out.println("After inner try/catch");
+            }
+        } catch (ArithmeticException nas) {
+            System.out.println("ln outer catch");
+        }
+        System.out.println("ln outer try/catch");
+    }
+}
+
+Output:
+In outer try
+ln inner try
+ln inner catch
+After inner try/catch
+ln outer try/catch
+
+
+Program6:
+class InnterTryDemo {
+	public static void main(String[] args) {
+		try {
+			int a = Integer.parseInt(args[0]);
+			try {
+				int[] x = new int[a];
+				System.out.println("Arrays size " + x.length);
+			} catch (NegativeArraySizeException t) {
+				int[] x = new int[31];
+				System.out.println("array size: " + x.length);
+				int b = a + 20;
+				System.out.println("b: " + b);
+			} catch (ArrayIndexOutOfBoundsException aiobe) {
+				System.out.println("Pass one int value");
+			}
+		} catch (NumberFormatException nfe) {
+			System.out.println("Pass only int value");
+		}
+	}
+}
+
+Output:
+what is the output of the above program for the below test cases:
+
+Case: 1 input 50
+Arrays size 50
+
+Case: 2 input -50
+array size: 31
+b: -30
+
+Case: 3 no input
+Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: Index 0 out of bounds for length 0
+        at Main.main(Main.java:4)
+
+case 4: input a
+Pass only int value
+
+Program7:
+class InnterTryDemo {
+	public static void main(String[] args) {
+		try {
+			int a = Integer.parseInt(args[0]);
+			System.out.println("a: " + a);
+			try {
+				int[] x = new int[a];
+				System.out.println("array size: " + x.length);
+			} catch (NullPointerException npc) {
+				System.out.println("NPE is raised");
+			}
+			int b = a + 20;
+			System.out.println("b: " + b);
+		} catch (ArrayIndexOutOfBoundsException aiobe) {
+			System.out.println("Pass one int value");
+		} catch (NumberFormatException nfe) {
+			System.out.println("Pass only int value");
+		} catch (NegativeArraySizeException nas) {
+			int[] x = new int[3];
+
+			System.out.println("ln outer try array size: " + x.length);
+		}
+		System.out.println("A fter outer try/catch");
+	}
+}
+
+
+what is the output of the above program for the above program when input is -5
+a: -5
+ln outer try array size: 3
+A fter outer try/catch
+
+Program8:
+class InnterTryDemo {
+	public static void main(String[] args) {
+		try {
+			int a = Integer.parseInt(args[0]);
+			System.out.println("a: " + a);
+			try {
+				int[] x = new int[a];
+				System.out.println("array size: " + x.length);
+			} catch (NullPointerException npc) {
+				System.out.println("NPE is raised");
+			}
+			int b = a + 20;
+			System.out.println("b: " + b);
+		} catch (ArrayIndexOutOfBoundsException aiobe) {
+			System.out.println("Pass one int value");
+		} catch (NumberFormatException nfe) {
+			System.out.println("Pass only int value");
+		}
+		System.out.println("A fter outer try/catch");
+	}
+}
+what is the output of the above program for the above program when input is -5
+a: -5
+Exception in thread "main" java.lang.NegativeArraySizeException: -5
+        at Main.main(Main.java:7)
+		
+		
+program 9
+---------
+
+class Example {
+	public static void main(String[] args) {
+		try {
+			System.out.println("ln try");
+		} catch (ArithmeticException ae) {
+			System.out.println("ln catch");
+		} finally {
+			System.out.println("ln finally");
+		}
+
+		System.out.println("After try/catch/finally");
+	}
+}
+ln try
+ln finally
+After try/catch/finally
+
+
+program 10
+---------
+
+
+class Example {
+	public static void main(String[] args) {
+		System.out.println(ml());
+	}
+
+	static int ml() {
+		try {
+			System.out.println("ln try");
+			return 10;
+		} catch (ArithmeticException e) {
+			System.out.println("ln catch");
+			return 20;
+		} finally {
+			System.out.println("ln finally");
+			return 30;
+		}
+	}
+}
+ln try
+ln finally
+30
+
+program 11
+----------
+
+class Example {
+	public static void main(String[] args) {
+		System.out.println(ml());
+	}
+
+	static int ml() {
+		try {
+			System.out.println("ln try");
+			System.out.println(10 / 0);
+		} catch (NullPointerException e) {
+			System.out.println("ln catch");
+		} finally {
+			System.out.println("ln finally");
+			return 30;
+		}
+	}
+}
+ln try
+ln finally
+30
+
+program 12
+----------
+
+class Example {
+	public static void main(String[] args) {
+		ml();
+		System.out.println("After m1 calling");
+	}
+
+	static void ml() {
+		try {
+			System.out.println("ln try");
+			System.out.println(10 / 0);
+		} catch (NullPointerException e) {
+			System.out.println("ln catch");
+		} finally {
+			System.out.println("ln finally");
+			return;
+		}
+	}
+}
+	
+ln try
+ln finally
+After m1 calling
+
+program 13
+----------
+
+class Example {
+	public static void main(String[] args) {
+		System.out.println(ml());
+	}
+
+	static int ml() {
+		try {
+			System.out.println("ln try");
+			System.out.println(10 / 0);
+		} catch (NullPointerException e) {
+			System.out.println("ln catch");
+		} finally {
+			System.out.println("ln finally");
+
+		}
+		return 30;
+	}
+}	
+ln try
+ln finally
+Exception in thread "main" java.lang.ArithmeticException: / by zero
+	at Main.ml(Main.java:9)
+	at Main.main(Main.java:3)
+
+program 14
+----------
+
+
+class Example {
+	public static void main(String[] args) {
+		System.out.println(ml());
+	}
+
+	static int ml() {
+		try {
+			System.out.println("ln try");
+			System.out.println(10 / 0);
+		} catch (NullPointerException e) {
+			System.out.println("ln catch");
+		} finally {
+			System.out.println("ln finally");
+			return 30;
+		}
+		System.out.println("after try/catch/finally");
+	}
+}	
+java: unreachable statement
+
+program 15
+----------
+
+class Example {
+	public static void main(String[] args) {
+		ml();
+	}
+
+	static void ml() {
+		try {
+			System.out.println("In outer try");
+			try {
+				System.out.println("In inner try");
+			} catch (NullPointerException npe) {
+				System.out.println("In inner catch");
+			} finally {
+				System.out.println("In inner finally");
+			}
+			System.out.println("After inner try/catch/finally");
+
+		} catch (NullPointerException npe) {
+			System.out.println("In outer catch");
+		} finally {
+			System.out.println("In outer finally");
+		}
+		System.out.println("After outer try/catch/finally");
+
+	}
+}
+In outer try
+In inner try
+In inner finally
+After inner try/catch/finally
+In outer finally
+After outer try/catch/finally
+
+
+program 16:
+-----------
+class Example {
+	public static void main(String[] args) {
+		System.out.println(m1());
+	}
+
+	static int m1() {
+		try {
+			System.out.println("In outer try");
+			try {
+				System.out.println("In inner try");
+
+			} catch (NullPointerException npe) {
+				System.out.println("In inner catch");
+			} finally {
+				System.out.println("In inner finally");
+				return 10;
+			}
+			System.out.println("After inner try/catch/finally");
+
+		} catch (NullPointerException npe) {
+			System.out.println("In outer catch");
+		} finally {
+			System.out.println("In outer finally");
+		}
+		System.out.println("After outer try/catch/finally");
+		return 30;
+
+	}
+}
+java: unreachable statement
+
+
+program 17:
+-----------
+
+class Example {
+	public static void main(String[] args) {
+		System.out.println("ln main method start");
+		m1();
+		System.out.println("ln main method end");
+	}
+
+	static void m1() {
+		System.out.println("ln ml method start");
+		System.out.println(10 / 0);
+		System.out.println("ln ml method end");
+	}
+}
+
+ln main method start
+ln ml method start
+Exception in thread "main" java.lang.ArithmeticException: / by zero
+	at Main.m1(Main.java:10)
+	at Main.main(Main.java:4)
+
+
+program 18:
+-----------
+class Example {
+	public static void main(String[] args) {
+		System.out.println("ln main method start");
+
+		try {
+			m1();
+		}catch (ArithmeticException ae) {
+			System.out.println("in main catch");
+		}
+
+		System.out.println("ln main method end");
+	}
+
+	static void m1() {
+		System.out.println("ln ml method start");
+		System.out.println(10 / 0);
+		System.out.println("ln ml method end");
+	}
+}
+Write a program that prompts the user to input an integer. If the user enters a negative integer, throw an exception. Catch the exception and display an error message.
+import java.util.Scanner;
+
+public class NegativeIntegerException {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        try {
+            System.out.print("Enter a positive integer: ");
+            int num = scanner.nextInt();
+            
+            if (num < 0) {
+                throw new Exception("Negative integers are not allowed.");
+            }
+            
+            System.out.println("You entered: " + num);
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+}
+Write a program that prompts the user to input a number. Catch any exceptions that might occur when the user inputs a non-numeric value.
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+public class NonNumericInputException {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        try {
+            System.out.print("Enter a number: ");
+            double num = scanner.nextDouble();
+            
+            System.out.println("You entered: " + num);
+        } catch (InputMismatchException e) {
+            System.out.println("Error: You entered a non-numeric value.");
+        }
+    }
+}
+
+Write a program that prompts the user to input a number. Catch any exceptions that might occur when the user inputs a number that is too large or too small for the program to handle.
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+public class NumberOutOfRange {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        try {
+            System.out.print("Enter a number between 0 and 100: ");
+            int num = scanner.nextInt();
+            
+            if (num < 0 || num > 100) {
+                throw new Exception("Number out of range.");
+            }
+            
+            System.out.println("You entered: " + num);
+        } catch (InputMismatchException e) {
+            System.out.println("Error: You entered a non-numeric value.");
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+}
